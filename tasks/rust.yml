@@ -106,6 +106,12 @@
     - cargo
     - tools
 
+- name: Install Cargo - fd-find
+  when: cargo_exists
+  shell: cargo install fd-find
+  tags:
+    - cargo
+    - tools
 
 - name: Install Cargo - dua-cli
   when: cargo_exists
