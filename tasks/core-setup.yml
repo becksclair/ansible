@@ -50,3 +50,21 @@
     - neovim
     - core
 
+- name: Get LLVM (Latest Stable)
+  become: true
+  ansible.builtin.get_url:
+    url: https://apt.llvm.org/llvm.sh
+    dest: /tmp/llvm_install.sh
+    mode: 0755
+  tags:
+    - install
+    - llvm
+    - core
+
+- name: Install LLVM (Latest Stable)
+  become: true
+  shell: "sh -c /tmp/llvm_install.sh"
+  tags:
+    - install
+    - llvm
+    - core
