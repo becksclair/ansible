@@ -1,0 +1,24 @@
+- name: Remove default Firefox
+  become: true
+  shell: sudo apt remove firefox
+  tags:
+    - install
+    - firefox
+
+- name: firefox dev ppa (ppa:ubuntu-mozilla-daily/ppa)
+  become: true
+  apt_repository:
+   repo: ppa:ubuntu-mozilla-daily/ppa
+   state: present
+   update_cache: True
+  tags:
+    - install
+    - firefox
+
+- name: Install packages
+  become: true
+  apt:
+    name: [ "firefox" ]
+  tags:
+    - install
+    - firefox
