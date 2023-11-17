@@ -1,4 +1,4 @@
-- name: neovim ppa (ppa:neovim-ppa/stable)
+- name: neovim ppa (ppa:neovim-ppa/unstable)
   become: true
   apt_repository:
    repo: ppa:neovim-ppa/unstable
