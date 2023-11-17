@@ -1,0 +1,17 @@
+- name: neovim ppa (ppa:neovim-ppa/stable)
+  become: true
+  apt_repository:
+   repo: ppa:neovim-ppa/unstable
+   state: present
+   update_cache: True
+  tags:
+    - install
+    - neovim
+
+- name: Install packages
+  become: true
+  apt:
+    name: [ "tmux", "wireshark", "fzf", "neovim", "xclip" ]
+  tags:
+    - install
+    - development

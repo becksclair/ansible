@@ -1,0 +1,15 @@
+- name: Set default terminal
+  shell: "gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'"
+  tags:
+      - config
+      - terminal
+
+- name: Set single instance mode
+  shell: "gsettings set org.gnome.desktop.default-applications.terminal exec-arg '--single-instance'"
+  tags:
+    - config
+    - terminal
+
+- name: Regenerate locales
+  become: true
+  shell: "sudo locale-gen 'en_US.UTF-8'"

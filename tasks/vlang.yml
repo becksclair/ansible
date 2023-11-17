@@ -1,0 +1,40 @@
+- name: Check if V is installed
+  ansible.builtin.stat:
+    path: "{{ lookup('env', 'HOME') }}/v"
+  register: v_installed
+
+- name: Download V
+  when: not v_installed.stat.exists
+  ansible.builtin.git:
+    repo: https://github.com/vlang/v
+    version: '0.4.3'
+    dest: "{{ lookup('env', 'HOME') }}/v"
+  tags:
+    - install
+    - v
+
+- name: Build V
+  shell: "cd {{ lookup('env', 'HOME') }}/v && make"
+  tags:
+    - install
+    - v
+
+- name: Install V
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/v && ./v symlink"
+  tags:
+    - install
+    - v
+
+- name: Build V Production
+  shell: "v self -prod"
+  tags:
+    - install
+    - v
+
+- name: Install V-Analyzer
+  shell: 'v -e "$(curl -fsSL https://raw.githubusercontent.com/v-analyzer/v-analyzer/master/install.vsh)"'
+  tags:
+    - install
+    - v
+

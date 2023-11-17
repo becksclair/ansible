@@ -1,0 +1,32 @@
+- hosts: localhost
+  vars:
+    source_key: "./.ssh/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    personal: "{{ lookup('env', 'HOME') }}/personal"
+  pre_tasks:
+  - name: Update Apt
+    become: true
+    apt:
+      force_apt_get: true
+      update_cache: true
+      state: present
+    tags:
+      - install
+      - core
+  tasks:
+    - include_tasks: tasks/nala.yml
+    # - include_tasks: tasks/ssh.yml
+    - include_tasks: tasks/core-setup.yml
+    # - include_tasks: tasks/personal-projects.yml
+    - include_tasks: tasks/dotfiles.yml
+    - include_tasks: tasks/neovim.yml
+    - include_tasks: tasks/mold.yml
+    - include_tasks: tasks/node.yml
+    - include_tasks: tasks/wasmer.yml
+    - include_tasks: tasks/emscripten.yml
+    - include_tasks: tasks/vlang.yml
+    - include_tasks: tasks/rust.yml
+    - include_tasks: tasks/lazygit.yml
+    - include_tasks: tasks/brave.yml
+    - include_tasks: tasks/env_tweaks.yml
+    # - include_tasks: tasks/productivity-tools.yml

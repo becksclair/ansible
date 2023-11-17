@@ -1,0 +1,312 @@
+- name: check if cargo is installed
+  shell: command -v cargo
+  register: cargo_exists
+  ignore_errors: true
+
+- name: Download Installer
+  when: cargo_exists is failed
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/sh.rustup.rs
+    mode: '0755'
+    force: 'yes'
+  tags:
+    - rust
+
+- name: install rust/cargo
+  when: cargo_exists is failed
+  shell: /tmp/sh.rustup.rs -y --default-toolchain nightly
+  tags:
+    - rust
+
+- name: Install Cargo - Bacon
+  when: cargo_exists
+  shell: cargo install bacon
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - bat
+  when: cargo_exists
+  shell: cargo install bat
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - bottom
+  when: cargo_exists
+  shell: cargo install bottom
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - cargo-update
+  when: cargo_exists
+  shell: cargo install cargo-update
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - cargo-bundle
+  when: cargo_exists
+  shell: cargo install cargo-bundle
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - cargo-expand
+  when: cargo_exists
+  shell: cargo install cargo-expand
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - cargo-info
+  when: cargo_exists
+  shell: cargo install cargo-info
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - cargo-show-asm
+  when: cargo_exists
+  shell: cargo install cargo-show-asm
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - cargo-watch
+  when: cargo_exists
+  shell: cargo install cargo-watch
+  tags:
+    - cargo
+    - tools
+
+
+- name: Install Cargo - create-tauri-app
+  when: cargo_exists
+  shell: cargo install create-tauri-app
+  tags:
+    - cargo
+    - tools
+
+
+- name: Install Cargo - drill
+  when: cargo_exists
+  shell: cargo install drill
+  tags:
+    - cargo
+    - tools
+
+
+- name: Install Cargo - du-dust
+  when: cargo_exists
+  shell: cargo install du-dust
+  tags:
+    - cargo
+    - tools
+
+
+- name: Install Cargo - dua-cli
+  when: cargo_exists
+  shell: cargo install dua-cli
+  tags:
+    - cargo
+    - tools
+
+
+- name: Install Cargo - fclones
+  when: cargo_exists
+  shell: cargo install fclones
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - git-delta
+  when: cargo_exists
+  shell: cargo install git-delta
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - htmlq
+  when: cargo_exists
+  shell: cargo install htmlq
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - huniq
+  when: cargo_exists
+  shell: cargo install huniq
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - irust
+  when: cargo_exists
+  shell: cargo install irust
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - jless
+  when: cargo_exists
+  shell: cargo install jless
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - just
+  when: cargo_exists
+  shell: cargo install just
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - lsd
+  when: cargo_exists
+  shell: cargo install lsd
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo -  mdcat
+  when: cargo_exists
+  shell: cargo install  mdcat
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - monolith
+  when: cargo_exists
+  shell: cargo install monolith
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - mprocs
+  when: cargo_exists
+  shell: cargo install mprocs
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - navi
+  when: cargo_exists
+  shell: cargo install navi
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - pastel
+  when: cargo_exists
+  shell: cargo install pastel
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - rm-improved
+  when: cargo_exists
+  shell: cargo install rm-improved
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - rtx-cli
+  when: cargo_exists
+  shell: cargo install rtx-cli
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - skim
+  when: cargo_exists
+  shell: cargo install skim
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - tauri-cli
+  when: cargo_exists
+  shell: cargo install tauri-cli
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - tealdeer
+  when: cargo_exists
+  shell: cargo install tealdeer
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - teehee
+  when: cargo_exists
+  shell: cargo install teehee
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - tin-summer
+  when: cargo_exists
+  shell: cargo install tin-summer
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - topgrade
+  when: cargo_exists
+  shell: cargo install topgrade
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - trunk
+  when: cargo_exists
+  shell: cargo install trunk
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - wasm-bindgen-cli
+  when: cargo_exists
+  shell: cargo install wasm-bindgen-cli
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - xd
+  when: cargo_exists
+  shell: cargo install xd
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - xh
+  when: cargo_exists
+  shell: cargo install xh
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - zoxide
+  when: cargo_exists
+  shell: cargo install zoxide
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - starship
+  when: cargo_exists
+  shell: cargo install starship
+  tags:
+    - cargo
+    - tools
+
+- name: Install Cargo - qsv
+  when: cargo_exists
+  shell: cargo install qsv --features all_features
+  tags:
+    - cargo
+    - tools

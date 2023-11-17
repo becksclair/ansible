@@ -1,0 +1,52 @@
+- name: Install System Packages 1 (build-essential, cmake, pkg-config, pthread, git, git-lfs)
+  become: true
+  apt:
+    name: ["build-essential", "gdb", "cmake", "pkg-config", "libpthread-stubs0-dev", "libssl-dev", "git", "git-lfs"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
+  become: true
+  apt:
+    name: [ "lua5.4", "unzip", "zstd", "libtool", "libtool-bin", "gettext"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install System Packages 3 (the rest)
+  become: true
+  apt:
+    name: [ "zsh", "curl", "htop", "golang", "lsof", "ccache", "ninja-build", "python3-pip", "dconf-editor", "moreutils", "clangd", "kitty", "libxcb1-dev", "libxcb-render0-dev", "libxcb-shape0-dev", "libxcb-xfixes0-dev", "libbz2-dev", "tk-dev", "libreadline-dev", "libyaml-dev", "libstdc++-12-dev", "libxi-dev", "libxcursor-dev", "libgl-dev", "mesa-common-dev", "libsqlite3-dev", "libsoup2.4-dev", "file", "libgtk-3-dev", "libwebkit2gtk-4.0-dev", "libayatana-appindicator3-dev", "librsvg2-dev" ]
+  tags:
+    - install
+    - core
+
+- name: Install Media Codecs
+  become: true
+  apt:
+    name: ["gstreamer1.0-plugins-ugly", "gstreamer1.0-plugins-bad", "vulkan-tools", "dxvk"]
+  tags:
+    - install
+    - core
+
+- name: Setup zsh as shell
+  become: true
+  user:
+    name: rebecca
+    shell: /usr/bin/zsh
+  tags:
+    - shell
+    - zsh
+
+- name: Install Clang
+  become: true
+  apt:
+    name: ["clang-15", "clangd-15", "clang-tools-15", "lldb-15", "llvm-15"]
+  tags:
+    - install
+    - neovim
+    - core
+

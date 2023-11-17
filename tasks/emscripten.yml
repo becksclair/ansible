@@ -1,0 +1,27 @@
+- name: Remove Emscripten
+  shell: rm -rf ~/emsdk
+  tags:
+    - install
+    - emsdk
+
+- name: Download Emscripten
+  ansible.builtin.git:
+    repo: https://github.com/emscripten-core/emsdk
+    dest: ~/emsdk
+  tags:
+    - install
+    - emsdk
+
+- name: Install Emscripten
+  shell: "cd ~/emsdk && ./emsdk install latest"
+  tags:
+    - install
+    - emsdk
+
+- name: Activate Emscripten
+  shell: "cd ~/emsdk && ./emsdk activate latest"
+  tags:
+    - install
+    - emsdk
+
+

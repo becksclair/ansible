@@ -1,0 +1,30 @@
+- name: Nala archive-keyring.gpg download
+  become: true
+  get_url:
+    url: https://deb.volian.org/volian/scar.key
+    dest: /etc/apt/trusted.gpg.d/volian-archive-scar-unstable.gpg
+  tags:
+    - nala
+    - install
+
+- name: Nala PPA setting
+  become: true
+  shell: echo "deb http://deb.volian.org/volian/ scar main" | sudo tee /etc/apt/sources.list.d/volian-archive-scar-unstable.list
+  tags:
+    - nala
+    - install
+
+- name: Nala apt installation
+  become: true
+  apt:
+    update_cache: yes
+    name: nala
+  tags:
+    - nala
+    - install
+
+- name: Install Nala Zsh completions
+  shell: nala --install-completion zsh
+  tags:
+    - nala
+    - install

@@ -1,0 +1,53 @@
+- name: Check if Bun is installed
+  ansible.builtin.stat:
+    path: "{{ lookup('env', 'HOME') }}/.bun"
+  register: bun_installed
+  tags:
+    - install
+    - node
+
+- name: Download Bun
+  when: not bun_installed.stat.exists
+  ansible.builtin.get_url:
+    url: https://bun.sh/install
+    dest: "/tmp/bun_install"
+    mode: 0755
+  tags:
+    - install
+    - node
+
+- name: Install Bun
+  when: not bun_installed.stat.exists
+  shell: "bash -c /tmp/bun_install"
+  tags:
+    - install
+    - node
+
+- name: Download PNPM
+  ansible.builtin.get_url:
+    url: https://get.pnpm.io/install.sh
+    dest: "/tmp/pnpm_install"
+    mode: 0755
+  tags:
+    - install
+    - node
+
+- name: Install PNPM
+  shell: "bash -c /tmp/pnpm_install"
+  tags:
+    - install
+    - node
+
+- name: Install Bun packages
+  when: bun_installed.stat.exists
+  shell: bun i -g bunx eslint eslint_d jest prettier npm npx playwright @fsouza/prettierd rimraf @tauri-apps/tauri typescript turbo
+  tags:
+    - install
+    - node
+
+- name: Update Bun packages
+  when: bun_installed.stat.exists
+  shell: bun update -g
+  tags:
+    - install
+    - node

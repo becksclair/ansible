@@ -1,0 +1,14 @@
+- name: Download Wasmer
+  ansible.builtin.get_url:
+    url: https://get.wasmer.io
+    dest: /tmp/wasmer_install
+    mode: 0755
+  tags:
+    - install
+    - node
+
+- name: Install Wasmer
+  shell: "bash -c /tmp/wasmer_install"
+  tags:
+    - install
+    - node

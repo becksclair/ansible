@@ -1,0 +1,47 @@
+- name: Remove Mold linker
+  shell: rm -rf ~/mold
+  tags:
+    - install
+    - mold
+
+- name: Get Mold Linker
+  ansible.builtin.git:
+    repo: 'https://github.com/rui314/mold'
+    version: 'v2.3.3'
+    dest: "{{ lookup('env', 'HOME') }}/mold"
+  tags:
+    - install
+    - mold
+
+- name: Install Mold build deps
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/mold && ./install-build-deps.sh"
+  tags:
+    - install
+    - mold
+
+- name: Create build dir
+  shell: "mkdir -p {{ lookup('env', 'HOME') }}/mold/build"
+  tags:
+    - install
+    - mold
+
+- name: Configure Mold Linker
+  shell: "cd {{ lookup('env', 'HOME') }}/mold/build && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=c++ .."
+  tags:
+    - install
+    - mold
+
+- name: Build Mold Linker
+  shell: "cd {{ lookup('env', 'HOME') }}/mold/build && cmake --build . -j $(nproc)"
+  tags:
+    - install
+    - mold
+
+- name: Install Mold Linker
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/mold/build && sudo cmake --build . --target install"
+  tags:
+    - install
+    - mold
+
