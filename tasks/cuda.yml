@@ -1,0 +1,32 @@
+- name: Get CUDA keyring
+  ansible.builtin.get_url:
+    url: 'https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb'
+    dest: '/tmp/cuda-keyring_all.deb'
+  tags:
+    - install
+    - cuda
+
+- name: Install CUDA keyring
+  become: true
+  shell: 'sudo dpkg -i /tmp/cuda-keyring_all.deb'
+  tags:
+    - install
+    - cuda
+
+- name: Update Apt
+  become: true
+  apt:
+    force_apt_get: true
+    update_cache: true
+    state: present
+  tags:
+    - install
+    - cuda
+
+- name: Install CUDA
+  become: true
+  apt:
+    name: ["cuda-toolkit-12-3", "cuda-drivers-545"]
+  tags:
+    - install
+    - cuda
