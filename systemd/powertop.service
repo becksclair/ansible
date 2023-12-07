@@ -1,0 +1,11 @@
+[Unit]
+Description=Powertop tunings
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/powertop --auto-tune
+ExecStartPost=/usr/bin/bash -c '/usr/bin/echo on > $(grep -Rl "Wired Mouse" /sys/bus/usb/devices/*/product | sed "s/product/power\/control/") || true'
+
+[Install]
+WantedBy=multi-user.target
